@@ -1,0 +1,30 @@
+# Dependency directories (The heavy stuff)
+node_modules/
+jspm_packages/
+
+# Environment variables (SECURITY: Never share these!)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build outputs (Even if you aren't using them now)
+dist/
+build/
+*.tsbuildinfo
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+*.log
+
+# OS Metadata
+.DS_Store
+Thumbs.db
+
+# IDE Settings
+.vscode/
+.idea/
