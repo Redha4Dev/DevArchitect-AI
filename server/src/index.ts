@@ -3,6 +3,11 @@ import cors from "cors";
 import { config } from "./config.js";
 import helmet from "helmet";
 import { apiLimiter } from "./middlewares/rateLimiter.js";
+import { login, register } from "./controllers/authController.js";
+import { authMiddelware } from "./middlewares/authMiddelware.js";
+import { connectDB } from "./db.js";
+import AIRouter from "./routes/aiRoutes.js";
+import githubRouter from "./routes/githubRoutes.js";
 
 const app: Application = express();
 
@@ -27,7 +32,22 @@ app.get("/", (req, res) => {
   res.send(`Server running in ${config.nodeEnv} mode`);
 });
 
+connectDB();
+
 // Use the port from our config
 app.listen(config.port, () => {
   console.log(`🚀 Server buzzing on http://localhost:${config.port}`);
+});
+
+app.use("/api/github", githubRouter)
+app.use('/api/ai', AIRouter);
+
+
+// PROTECTED ROUTES
+app.get("/api/dashboard", authMiddelware, (req, res) => {
+  res.json({
+    status: "success",
+    message: `Welcome back, User ID: ${(req.user as any).id}`,
+    secretData: "Only logged in users can see this!",
+  });
 });

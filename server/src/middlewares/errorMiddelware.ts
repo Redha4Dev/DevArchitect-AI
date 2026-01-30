@@ -12,18 +12,20 @@ export const globalErrorHandler = (
     return res.status(400).json({
       status: "fail",
       message: "Validation Error",
+      //@ts-ignore
       errors: err.errors.map((e: any) => ({
         path: e.path.join("."),
         message: e.message,
       })),
     });
   }
-
-  err.statusCode = err.statusCode || 500;
-  err.status = err.status || "error";
+  //@ts-ignore
+  err.statusCode = err.statusCode || 500; err.status = err.status || "error";
 
   // Send response
+  //@ts-ignore
   res.status(err.statusCode).json({
+    // @ts-ignore
     status: err.status,
     message: err.message,
     // Only show stack trace in development mode

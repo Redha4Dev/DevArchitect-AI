@@ -7,6 +7,12 @@ export const config = {
   nodeEnv: process.env.NODE_ENV || "development",
   dbUrl: process.env.DB_URL,
   apiKey: process.env.API_KEY,
+  jwtSecret: process.env.JWT_SECRET || "secret",
+  jwtExpiresIn: process.env.JWT_EXPIRES_IN || '15d',
+  mongoUrl: process.env.MONGO_URL || "mongodb://localhost:27017",
+  olamaHost: process.env.OLAMA_HOST || "http://localhost:11434",
+  olamaModel: process.env.OLAMA_MODEL || "mistral-local",
+  githubToken: process.env.GITHUB_TOKEN,
 };
 
 // if (!config.dbUrl) {
