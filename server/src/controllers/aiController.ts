@@ -9,7 +9,7 @@ import { TaskType } from "../services/ai/tasks.js";
 export const chatWithAI = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
     const { message, role, task } = req.body as {
@@ -19,16 +19,14 @@ export const chatWithAI = async (
     };
 
     if (!message || !role || !task) {
-      return next(
-        new AppError("Please provide message, role, and task", 400)
-      );
+      return next(new AppError("Please provide message, role, and task", 400));
     }
 
     // ✅ Build chat-native prompt
     const messages = buildMessages({
       role,
       task,
-      input: message,
+      normalizedData: message,
     });
 
     // ✅ Send messages directly to LLM

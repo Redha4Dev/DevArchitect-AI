@@ -23,6 +23,10 @@ class AIService {
         model: this.model,
         messages,
         stream: false,
+        //temperature: 0.2,
+        options: {
+          num_predict: 600,
+        }
       });
 
       return response.message.content;

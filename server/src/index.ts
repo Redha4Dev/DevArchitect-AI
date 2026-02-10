@@ -8,6 +8,7 @@ import { authMiddelware } from "./middlewares/authMiddelware.js";
 import { connectDB } from "./db.js";
 import AIRouter from "./routes/aiRoutes.js";
 import githubRouter from "./routes/githubRoutes.js";
+import authRouter from "./routes/authRoutes.js";
 
 const app: Application = express();
 
@@ -39,9 +40,9 @@ app.listen(config.port, () => {
   console.log(`🚀 Server buzzing on http://localhost:${config.port}`);
 });
 
-app.use("/api/github", githubRouter)
-app.use('/api/ai', AIRouter);
-
+app.use("/api/github", githubRouter);
+app.use("/api/ai", AIRouter);
+app.use("/", authRouter);
 
 // PROTECTED ROUTES
 app.get("/api/dashboard", authMiddelware, (req, res) => {
